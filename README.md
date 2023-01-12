@@ -1,4 +1,6 @@
 ```
+export GITLAB_HOME=/srv/gitlab
+
 docker compose up -d
 
 docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
@@ -12,6 +14,7 @@ docker exec -it gitlab-runner gitlab-runner register \
  --clone-url "https://gitlab.eth.su"
 
 ```
+Get your token on page https://gitlab/admin/runners
 
 ```
 Runtime platform                                    arch=amd64 os=linux pid=35 revision=6d480948 version=15.7.1
