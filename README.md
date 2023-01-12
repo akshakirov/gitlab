@@ -1,11 +1,14 @@
+```
   docker compose up -d
 
   docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
 
   docker logs -f gitlab
+```
 
-
+```
   docker exec -it gitlab-runner gitlab-runner register --url "https://gitlab.eth.su" --clone-url "https://gitlab.eth.su"
+```
 Runtime platform                                    arch=amd64 os=linux pid=35 revision=6d480948 version=15.7.1
 Running in system-mode.                            
                                                    
@@ -28,10 +31,10 @@ ubuntu:latest
 Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
  
 Configuration (with the authentication token) was saved in "/etc/gitlab-runner/config.toml" 
-
+```
   docker exec -it gitlab-runner vi /etc/gitlab-runner/config.toml
-
+```
 add string at the end of the file
-
+```
     network_mode = "gitlab-network"
-
+```
