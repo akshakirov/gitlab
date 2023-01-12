@@ -1,9 +1,7 @@
 version: '3.6'
 services:
   web:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    image: 'gitlab/gitlab-ce:latest'
     restart: always
     container_name: 'gitlab'
     hostname: 'gitlab.eth.su'
@@ -22,11 +20,26 @@ services:
       - '$GITLAB_HOME/logs:/var/log/gitlab'
       - '$GITLAB_HOME/data:/var/opt/gitlab'
     shm_size: '256m'
+    networks:
+      - gitlab
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    container_name: gitlab-runner    
+    restart: always
+    depends_on:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - '$GITLAB_HOME/gitlab-runner:/etc/gitlab-runner'
+    networks:
+      - gitlab
   exim:
     image: tianon/exim4
     restart: always
     container_name: 'exim'
     hostname: 'gitlab.eth.su'
     ports:
-      - '25:25'
- 
+      - '2525:25'
+networks:
+  gitlab:
+    name: gitlab-network
