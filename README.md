@@ -8,7 +8,7 @@
 
 ```
   docker exec -it gitlab-runner gitlab-runner register --url "https://gitlab.eth.su" --clone-url "https://gitlab.eth.su"
-```
+
 Runtime platform                                    arch=amd64 os=linux pid=35 revision=6d480948 version=15.7.1
 Running in system-mode.                            
                                                    
@@ -31,6 +31,9 @@ ubuntu:latest
 Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
  
 Configuration (with the authentication token) was saved in "/etc/gitlab-runner/config.toml" 
+```
+
+Setting up a network
 ```
   docker exec -it gitlab-runner vi /etc/gitlab-runner/config.toml
 ```
