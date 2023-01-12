@@ -1,14 +1,19 @@
 ```
-  docker compose up -d
+docker compose up -d
 
-  docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
+docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
 
-  docker logs -f gitlab
+docker logs -f gitlab
 ```
 
 ```
-  docker exec -it gitlab-runner gitlab-runner register --url "https://gitlab.eth.su" --clone-url "https://gitlab.eth.su"
+docker exec -it gitlab-runner gitlab-runner register \
+ --url "https://gitlab.eth.su" \
+ --clone-url "https://gitlab.eth.su"
 
+```
+
+```
 Runtime platform                                    arch=amd64 os=linux pid=35 revision=6d480948 version=15.7.1
 Running in system-mode.                            
                                                    
