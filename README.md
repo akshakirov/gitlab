@@ -26,8 +26,6 @@ Enter a description for the runner:
 Enter tags for the runner (comma-separated):
 docker
 Enter optional maintenance note for the runner:
-
-WARNING: Support for registration tokens and runner parameters in the 'register' command has been deprecated in GitLab Runner 15.6 and will be replaced with support for authentication tokens. For more information, see https://gitlab.com/gitlab-org/gitlab/-/issues/380872 
 Registering runner... succeeded                     runner=dYsp4JrL
 Enter an executor: shell, ssh, virtualbox, docker+machine, kubernetes, docker, docker-ssh, parallels, custom, docker-ssh+machine, instance:
 [docker, ssh, shell,]: docker
