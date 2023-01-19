@@ -1,4 +1,4 @@
-# Istallation of Gitlab Community Edition latest
+# Gitlab Community Edition latest + runner + MTA (exim)
 
 ## Install
 ```
