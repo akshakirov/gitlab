@@ -22,13 +22,13 @@ docker logs -f gitlab
 ```
 
 ## Registering runner
-Get your token on page https://gitlab/admin/runners
+Get your token on page https://gitlab.test.com/admin/runners
 
 ```
 docker exec -it gitlab-runner gitlab-runner register \
 	--non-interactive \
-	--url "https://gitlab.eth.su" \
-	--clone-url "https://gitlab.eth.su" \
+	--url "https://gitlab.test.com" \
+	--clone-url "https://gitlab.test.com" \
 	--registration-token "TOKEN_HERE" \
 	--executor "docker" \
 	--docker-image ubuntu:22.04 \
@@ -59,10 +59,10 @@ As a minimum, back up the database and the GitLab secrets file.
 docker exec -t <container name> gitlab-backup create SKIP=artifacts,repositories,registry,uploads,builds,pages,lfs,packages,terraform_state
 ```
 
-    Download the newest release and upgrade your GitLab instance:
+Download the newest release and upgrade your GitLab instance:
 ```
-    docker compose pull
-    docker compose up -d
+docker compose pull
+docker compose up -d
 ```
 
 If you have used tags instead, you'll need to first edit docker-compose.yml.
