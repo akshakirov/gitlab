@@ -1,4 +1,4 @@
-# This Docker Compose installation of Gitlab Community Edition latest
+# Istallation of Gitlab Community Edition latest
 
 ## Install
 ```
