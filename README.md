@@ -2,11 +2,12 @@
 
 ## Install
 ```
-git clone git@github.com:akshakirov/gitlab-install.git
+git clone https://github.com/akshakirov/gitlab.git
 
-cd gitlab-install
+cd gitlab
 
 export GITLAB_HOME=/srv/gitlab
+export GITLAB_DOMAIN=gitlab.test.com
 
 docker compose up -d
 ```
@@ -27,9 +28,9 @@ Get your token on page https://gitlab.test.com/admin/runners
 ```
 docker exec -it gitlab-runner gitlab-runner register \
 	--non-interactive \
-	--url "https://gitlab.test.com" \
-	--clone-url "https://gitlab.test.com" \
-	--registration-token "TOKEN_HERE" \
+	--url "https://$GITLAB_DOMAIN" \
+	--clone-url "https://GITLAB_DOMAIN" \
+	--registration-token "<PUT_TOKEN_HERE>" \
 	--executor "docker" \
 	--docker-image ubuntu:22.04 \
 	--description "docker-runner"
