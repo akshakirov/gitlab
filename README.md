@@ -1,5 +1,12 @@
 # Gitlab Community Edition latest + runner + MTA (exim)
 
+## Before install
+Change sshd port from 22 to something else
+```
+sed -i "s/#Port 22/Port 2233/g" /etc/ssh/sshd_config
+systemctl restart sshd
+```
+
 ## Install
 ```
 git clone https://github.com/akshakirov/gitlab.git
