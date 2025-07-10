@@ -1,0 +1,36 @@
+debug = false
+
+logLevel = "ERROR"
+defaultEntryPoints = ["https","http"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+  [entryPoints.https.tls]
+
+  [entryPoints.traefik]
+  address = ":9000"
+
+[retry]
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "$GITLAB_DOMAIN"
+watch = true
+exposedByDefault = false
+
+[acme]
+email = "letsencrypt@$GITLAB_DOMAIN"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
+
+[api]
+entryPoint = "traefik"
+dashboard = true

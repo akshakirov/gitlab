@@ -9,6 +9,8 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://$GITLAB_DOMAIN'
+        nginx['listen_https'] = false
+        nginx['listen_port'] = 80
         gitlab_rails['gitlab_shell_ssh_port'] = 22
         gitlab_rails['smtp_enable'] = true
         gitlab_rails['smtp_address'] = 'exim'
@@ -20,9 +22,15 @@ services:
         gitlab_rails['smtp_ssl'] = false
         gitlab_rails['smtp_force_ssl'] = false
     ports:
-      - '80:80'
-      - '443:443'
+      #- '80:80'
+      #- '443:443'
       - '22:22'
+    labels:
+      - "traefik.frontend.rule=Host:$GITLAB_DOMAIN"
+      - "traefik.docker.network=gitlab"
+      - "traefik.enable=true"
+      - "traefik.port=80"
+      - "traefik.protocol=http"
     volumes:
       - '$GITLAB_HOME/config:/etc/gitlab'
       - '$GITLAB_HOME/logs:/var/log/gitlab'
@@ -37,7 +45,7 @@ services:
     depends_on:
       - web
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - "/var/run/docker.sock:/var/run/docker.sock"
       - '$GITLAB_HOME/gitlab-runner/config:/etc/gitlab-runner'
       - '$GITLAB_HOME/gitlab-runner/data:/home/gitlab_ci_multi_runner/data'
     environment:
@@ -53,6 +61,21 @@ services:
       - '25:25'
     networks:
       - gitlab
+  traefik:
+    image: traefik
+    command: --api --docker  # Enables the web UI and tells Traefik to listen to docker
+    restart: always
+    networks:
+    - gitlab
+    ports:
+    - "80:80"
+    - "443:443"
+    - "9000:9000"  # exposes the Traefik web UI
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"  # So that Traefik can listen to the Docker events
+      - "./traefik.toml:/traefik.toml"
+      - "./acme.json:/acme.json"
+    container_name: traefik
 networks:
   gitlab:
     name: gitlab-network

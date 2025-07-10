@@ -1,0 +1,11 @@
+[Unit]
+Description=Docker prune images older than 4 hour
+Requires=docker-prune.service
+
+[Timer]
+Unit=docker-prune.service
+OnCalendar=*-*-* *:00:00
+
+[Install]
+WantedBy=timers.target
+
