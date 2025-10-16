@@ -12,6 +12,12 @@ Be sure that you installed docker and docker-compose
 
 
 ## Install
+Certs:
+```
+cp /etc/letsencrypt/live/gitlab.test.com/fullchain.pem /srv/gitlab/config/ssl/gitlab.test.com.crt
+cp /etc/letsencrypt/live/gitlab.test.com/privkey.pem /srv/gitlab/config/ssl/gitlab.test.com.key
+```
+
 ```
 git clone https://github.com/akshakirov/gitlab.git
 
